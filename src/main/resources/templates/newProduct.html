@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div th:replace="fragments :: header"></div>
+<body>
+<div th:replace="fragments :: head"></div>
+
+<main role="main">
+    <div class="container" >
+        <div class="page-header m-4">
+            <h2>Add product</h2>
+            <p class="lead">Add these fields to add a product.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3"></h4>
+                <form action="#" th:action="@{add}" th:object="${product}" method="post"class="needs-validation" novalidate>
+
+                    <div>
+                        <input type="hidden" th:field="*{id}">
+                    </div>
+                    <div class="mb-3">
+                        <label>Product</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Product name">
+                    </div>
+                    <div class="mb-3">
+                        <label text="Description">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Product description" th:field="*{description}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label text="Manufacturer">Manufacturer</label>
+                        <input type="text" class="form-control" id="manufacturer" placeholder="Product manufacturer" th:field="*{manufacturer}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label text="Price">Price</label>
+                        <input type="number" class="form-control" min="0" value="0" step=".01" th:field="*{price}" id="price"  >
+                    </div>
+                    <div class="mb-3">
+                        <label text="Available items">Available items</label>
+                        <input type="number" class="form-control" min="0" value="0" th:field="*{unitInStock}" id="unitInStock"  >
+                    </div>
+                    <div>
+                        <input type="submit" class=" btn btn-dark" value="Submit"/>
+                    </div>
+                </form>
+            </div> <!--col-->
+        </div>  <!--row-->
+
+    </div><!-- /.container -->
+
+
+    <div th:replace="fragments :: footer"></div>
+</main>
+<div th:replace="fragments :: js"></div>
+
+</body>
+</html>
