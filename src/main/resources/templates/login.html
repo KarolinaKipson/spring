@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head" ></head>
+<body>
+<div th:replace="fragments :: header" ></div>
+<main role="main">
+<div class="container padding-login">
+    <div class="row">
+        <div class="col-md-8 order-md-1 offset-3">
+            <h1>Login</h1>
+            <div th:if="${param.error}" class="login-error" >Unable to login. Check your username and password.</div>
+            <div th:if="${param.logout}" class="logout-success" >You have successfully logged out.</div>
+
+            <form method="POST" th:action="@{/login}">
+                <div class="form-row">
+                    <div class="col-md-8 mb-3 ">
+                        <label for="username">Username: </label>
+                        <input type="text" name="username" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-8 mb-3">
+                        <label for="password">Password: </label>
+                        <input type="password" name="password" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-2 mb-3 offset-3">
+                        <input type="submit" value="Login" class="form-control btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</main>
+<div th:replace="fragments :: footer"  id="footer"></div>
+<div th:replace="fragments :: js"></div>
+</body>
+</html>

@@ -7,13 +7,13 @@
 <div th:replace="fragments :: head"></div>
 
 <main role="main">
-    <div class="container">
-        <div class="page-header m-4">
+    <div class="container padding">
+        <div class="page-header m-4 center">
             <h2>Edit product</h2>
             <p class="lead">Edit these fields to change a product.</p>
         </div>
         <div class="row">
-            <div class="col-md-8 order-md-1">
+            <div class="col-md-8 order-md-1 offset-2">
                 <h4 class="mb-3"></h4>
                 <form action="#" th:action="@{/emusicstore/}" th:object="${product}" method="post">
                 <div>
@@ -41,7 +41,7 @@
                         <label text="Available items">Available items</label>
                         <input type="number" class="form-control" min="0" value="0" th:field="*{unitInStock}" id="unitInStock"  >
                     </div>
-                    <div>
+                    <div class="offset-6">
                         <input type="submit" class=" btn btn-dark" value="Submit"/>
                     </div>
                   </form>
@@ -52,8 +52,9 @@
     </div><!-- /.container -->
 
 
-    <div th:replace="fragments :: footer"></div>
+
 </main>
+<div th:replace="fragments :: footer" ></div>
 <div th:replace="fragments :: js"></div>
 
 </body>

@@ -1,8 +1,11 @@
 package hr.kipson.karolina.ecommerce.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -18,7 +21,8 @@ public class Product {
     private BigDecimal price;
     private int unitInStock;
     private String manufacturer;
-
+    @Transient
+    private MultipartFile productImage;
 
 
     public Product() {
@@ -79,5 +83,13 @@ public class Product {
 
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
+    }
+
+    public MultipartFile getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(MultipartFile productImage) {
+        this.productImage = productImage;
     }
 }

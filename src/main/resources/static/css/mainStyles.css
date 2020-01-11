@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+html,
+body {
+    height: 100%;
+    position: relative;
+}
+main {
+    min-height: 85vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px; /* height of your footer */
+}
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.center {
+    text-align: center;
+    align-items: center;
+}
+.padding{
+    padding-top: 1em;
+
+}
+.padding-login{
+    padding-top: 4em;
+
+}

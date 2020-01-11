@@ -4,6 +4,7 @@ import hr.kipson.karolina.ecommerce.model.Product;
 import hr.kipson.karolina.ecommerce.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -33,12 +34,14 @@ public class ProductController {
     }
 
     @GetMapping("/add")
+    @Secured("ROLE_ADMIN")
     public String createProduct(Model model){
         model.addAttribute("product", new Product());
         return "newProduct";
     }
 
     @PostMapping("/add")
+    @Secured("ROLE_ADMIN")
     public String createNewProduct(@Valid Product product, Errors errors, Model model){
         if(errors.hasErrors()){
             log.info("There were errors in the submitted form");
@@ -68,6 +71,7 @@ public class ProductController {
     }
 
     @GetMapping("/productedit/{productId}")
+    @Secured("ROLE_ADMIN")
     public String productEdit(@PathVariable Long productId, Model model) throws IOException {
         Product product = productRepository.findOne(productId);
         model.addAttribute("product", product);
@@ -76,6 +80,7 @@ public class ProductController {
 
 
     @PostMapping(value ="/")
+    @Secured("ROLE_ADMIN")
     public String productEditSave(@Valid Product product, Errors errors, Model model){
         if(errors.hasErrors()){
             log.info("There were errors in the submitted form");
@@ -87,6 +92,7 @@ public class ProductController {
     }
 
     @GetMapping("/deleteproduct/{productId}")
+    @Secured("ROLE_ADMIN")
     public String handleDeleteProduct(@PathVariable long productId, Model model) {
         productRepository.delete(productId);
         Iterable<Product> iterable = productRepository.findAll();
