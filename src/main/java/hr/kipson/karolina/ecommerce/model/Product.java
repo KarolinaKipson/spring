@@ -1,35 +1,45 @@
 package hr.kipson.karolina.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class Product implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Size(min = 2, max = 20, message = "The exercise name should be between 2 and 20 characters long")
+    @Size(min = 2, max = 20, message = "The name should be between 2 and 20 characters long")
     private String name;
     private String description;
     private BigDecimal price;
+    @Column(name = "unitinstock")
     private int unitInStock;
     private String manufacturer;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, orphanRemoval = true)
+    @Valid
+    private List<Item> items;
     @Transient
     private MultipartFile productImage;
-
 
     public Product() {
 
     }
 
-    public Product( String name, String description, BigDecimal price,  int unitInStock, String manufacturer) {
+    public Product(Long id, String name, String description, BigDecimal price,  int unitInStock, String manufacturer) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
