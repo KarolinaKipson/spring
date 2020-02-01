@@ -8,8 +8,8 @@
 <main role="main">
     <div class="container padding" >
         <div class="page-header m-4">
-            <h2>Product Detail</h2>
-            <p class="lead">Here is the detail information of our product</p>
+            <h2 th:text="#{msg.app.label.product.detail}"></h2>
+            <p class="lead" th:text="#{msg.app.label.product.detail.description}" ></p>
         </div>
     </div><!-- /.container -->
 
@@ -19,11 +19,22 @@
              <img th:src="@{/img/tobias-reich-nv8q1ft13CE-unsplash.jpg}" style="width: 80%;height: 80%"/>
              </div>
             <div class="col-md-5">
-              <h4>Product: [[${product.name}]]</h4>
-               <p>Description: [[${product.description}]]</p>
-               <p>Manufacturer: [[${product.manufacturer}]]</p>
-                <p>Price: [[${product.price}]] kn</p>
-                <p>Items available: [[${product.unitInStock}]]</p>
+                <div>
+                    <h4  th:text="#{msg.app.label.product}"></h4><span>[[${product.name}]]</span>
+                </div>
+                <div>
+                    <p  th:text="#{msg.app.label.description}"></p><span>[[${product.description}]]</span>
+                </div>
+                <div>
+                    <p  th:text="#{msg.app.label.manufacturer}"></p><span>[[${product.manufacturer}]]</span>
+                </div>
+                <div>
+                    <p  th:text="#{msg.app.label.price}"></p><span>[[${product.price}]] kn</span>
+                </div>
+                <div>
+                    <p  th:text="#{msg.app.label.items.in.stock}"></p><span>[[${product.unitInStock}]]</span>
+                </div>
+
             </div>
         </div>
 

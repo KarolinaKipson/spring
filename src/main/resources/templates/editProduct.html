@@ -9,8 +9,8 @@
 <main role="main">
     <div class="container padding">
         <div class="page-header m-4 center">
-            <h2>Edit product</h2>
-            <p class="lead">Edit these fields to change a product.</p>
+            <h2 th:text="#{msg.app.label.edit.product}"></h2>
+            <p class="lead" th:text="#{msg.app.label.edit.product.description}"></p>
         </div>
         <div class="row">
             <div class="col-md-8 order-md-1 offset-2">
@@ -20,29 +20,29 @@
                    <input type="hidden" th:field="*{id}">
                 </div>
                     <div class="mb-3">
-                        <label>Product</label>
+                        <label th:text="#{msg.app.label.product}"></label>
                         <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Product name">
                     </div>
                     <div class="mb-3">
-                        <label text="Description">Description</label>
+                        <label th:text="#{msg.app.label.description}"></label>
                         <input type="text" class="form-control" id="description" placeholder="Product description" th:field="*{description}">
                     </div>
 
                     <div class="mb-3">
-                        <label text="Manufacturer">Manufacturer</label>
+                        <label th:text="#{msg.app.label.manufacturer}"></label>
                         <input type="text" class="form-control" id="manufacturer" placeholder="Product manufacturer" th:field="*{manufacturer}">
                     </div>
 
                     <div class="mb-3">
-                        <label text="Price">Price</label>
+                        <label th:text="#{msg.app.label.price}"></label>
                         <input type="number" class="form-control" min="0" value="0" step=".01" th:field="*{price}" id="price"  >
                     </div>
                     <div class="mb-3">
-                        <label text="Available items">Available items</label>
+                        <label th:text="#{msg.app.label.items.in.stock}"></label>
                         <input type="number" class="form-control" min="0" value="0" th:field="*{unitInStock}" id="unitInStock"  >
                     </div>
                     <div class="offset-6">
-                        <input type="submit" class=" btn btn-dark" value="Submit"/>
+                        <input type="submit" class=" btn btn-dark" th:value="#{msg.app.button.submit}"/>
                     </div>
                   </form>
 

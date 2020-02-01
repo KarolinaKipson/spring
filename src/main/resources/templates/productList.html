@@ -9,21 +9,21 @@
 <main role="main">
     <div class="container padding" >
        <div class="page-header m-4 center">
-           <h2>All products!</h2>
-           <p class="lead">Check our awsome products!</p>
+           <h2 th:text="#{msg.app.label.all.products}"></h2>
+           <p class="lead" th:text="#{msg.app.label.all.products.description}"></p>
        </div>
         <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a th:href="@{add}" class="btn btn-dark" title="Add product."><i class="fas fa-plus" style="color: #0f6674" ></i>&nbsp;&nbsp;Add new Product</a>
+            <a th:href="@{add}" class="btn btn-dark" title="Add product." th:text="#{msg.app.label.add.product}"><i class="fas fa-plus" style="color: #0f6674" ></i></a>
         </div>
         <br>
         <div class="table-responsive">
         <table class="table table-striped table-hover table-dark " >
             <thead>
             <tr class="bg-info">
-                <th>Photo</th>
-                <th>Manufacturer</th>
-                <th>Product name</th>
-                <th>Price</th>
+                <th th:text="#{msg.app.label.photo}"></th>
+                <th th:text="#{msg.app.label.manufacturer}" ></th>
+                <th th:text="#{msg.app.label.product.name}"></th>
+                <th th:text="#{msg.app.label.price}"></th>
                 <th></th>
             </tr>
             </thead>
@@ -42,10 +42,10 @@
                 </td>
 
                 <td style="width:10%;" >
-                    <a th:href="@{productdetail/{id}(id=${product.id})}" title="See the details of the product."><i class="fas fa-info" style="color: #0f6674"></i> </a>&nbsp;&nbsp;
+                    <a th:href="@{productdetail/{id}(id=${product.id})}" th:title="#{msg.app.label.product.details.description}"><i class="fas fa-info" style="color: #0f6674"></i> </a>&nbsp;&nbsp;
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')" >
-                      <a th:href="@{productedit/{id}(id=${product.id})}" title="Edit product."><i class="fas fa-edit" style="color: #0f6674"></i></a>&nbsp;&nbsp;
-                      <a th:href="@{deleteproduct/{id}(id=${product.id})}" title="Delete product."><i class="fas fa-trash" style="color: #0f6674"></i></a>
+                      <a th:href="@{productedit/{id}(id=${product.id})}" th:title="#{msg.app.label.edit.product}"><i class="fas fa-edit" style="color: #0f6674"></i></a>&nbsp;&nbsp;
+                      <a th:href="@{deleteproduct/{id}(id=${product.id})}" th:title="#{msg.app.label.delete.product}"><i class="fas fa-trash" style="color: #0f6674"></i></a>
                     </th:block>
                 </td>
             </tr>
