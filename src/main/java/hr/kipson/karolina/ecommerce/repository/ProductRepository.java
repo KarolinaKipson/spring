@@ -20,31 +20,31 @@ public class ProductRepository {
         this.jdbc = jdbc;
         this.productInserter = new SimpleJdbcInsert(jdbc)
                 .withTableName("product")
-                .usingGeneratedKeyColumns("id");
+                .usingGeneratedKeyColumns("product_id");
     }
 
 
     public Iterable<Product> findAll() {
-        return jdbc.query("select id, name, description, price, unitInStock, manufacturer from product", this::mapRowToProduct);
+        return jdbc.query("select product_id, name, description, price, unitInStock, manufacturer from product", this::mapRowToProduct);
     }
 
     public Product findOne(Long id) {
-        return jdbc.queryForObject("select id, name, description, price, unitInStock, manufacturer from product where id = ?", this::mapRowToProduct, id);
+        return jdbc.queryForObject("select product_id, name, description, price, unitInStock, manufacturer from product where product_id = ?", this::mapRowToProduct, id);
     }
 
     public int update(Product product) {
-        return jdbc.update("update product set name =?, description = ?, price = ?, unitInStock = ?, manufacturer = ? where id = ?",product.getName(), product.getDescription(), product.getPrice(), product.getUnitInStock(), product.getManufacturer(), product.getId() );
+        return jdbc.update("update product set name =?, description = ?, price = ?, unitInStock = ?, manufacturer = ? where product_id = ?",product.getName(), product.getDescription(), product.getPrice(), product.getUnitInStock(), product.getManufacturer(), product.getProductId() );
     }
 
     public Product save(Product product) {
-        product.setId(saveProductDetails(product));
+        product.setProductId(saveProductDetails(product));
         return product;
     }
 
 
     public void delete(Long id){
 
-        jdbc.update("delete from product where id= ?", id);
+        jdbc.update("delete from product where product_id= ?", id);
     }
 
 
@@ -64,7 +64,7 @@ public class ProductRepository {
     private Product mapRowToProduct(ResultSet rs, int rowNum) throws SQLException {
         Product product = new Product();
 
-        product.setId(rs.getLong("id"));
+        product.setProductId(rs.getLong("productId"));
         product.setDescription(rs.getString("description"));
         product.setName(rs.getString("name"));
         product.setPrice(rs.getBigDecimal("price"));

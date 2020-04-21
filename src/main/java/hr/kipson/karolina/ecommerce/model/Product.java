@@ -16,9 +16,11 @@ import java.util.Set;
 @Entity
 @Table(name = "product")
 public class Product implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "product_id")
+    private long productId;
     @Size(min = 2, max = 20, message = "The name should be between 2 and 20 characters long")
     private String name;
     private String description;
@@ -38,8 +40,7 @@ public class Product implements Serializable {
 
     }
 
-    public Product(Long id, String name, String description, BigDecimal price,  int unitInStock, String manufacturer) {
-        this.id = id;
+    public Product( String name, String description, BigDecimal price,  int unitInStock, String manufacturer) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -47,12 +48,13 @@ public class Product implements Serializable {
         this.manufacturer = manufacturer;
     }
 
-    public long getId() {
-        return id;
+
+    public long getProductId() {
+        return productId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public String getName() {

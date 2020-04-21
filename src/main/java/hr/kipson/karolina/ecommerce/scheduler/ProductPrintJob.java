@@ -2,6 +2,7 @@ package hr.kipson.karolina.ecommerce.scheduler;
 
 import hr.kipson.karolina.ecommerce.model.Product;
 import hr.kipson.karolina.ecommerce.repository.ProductRepository;
+import hr.kipson.karolina.ecommerce.repository.ProductRepositoryApi;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -13,9 +14,9 @@ public class ProductPrintJob extends QuartzJobBean {
 
     private Logger log = LoggerFactory.getLogger(ProductPrintJob.class);
 
-    private final ProductRepository productRepository;
+    private final ProductRepositoryApi productRepository;
 
-    public ProductPrintJob(ProductRepository productRepository) {
+    public ProductPrintJob(ProductRepositoryApi productRepository) {
         this.productRepository = productRepository;
     }
 
