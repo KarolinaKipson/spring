@@ -13,7 +13,7 @@ public class Item implements Serializable {
     private int itemId;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private Product product;
 
     @Column(nullable = false)
