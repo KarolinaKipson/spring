@@ -22,7 +22,7 @@ public class RestProductController {
 
     @GetMapping(value = { "", "/" })
     public @NotNull Iterable<Product> getProducts() {
-        return productRepository.findAll();
+        return productRepository.findAllByOrderByProductId();
     }
 
     @GetMapping("/{id}")
