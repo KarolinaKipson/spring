@@ -5,6 +5,7 @@ import hr.kipson.karolina.ecommerce.repository.ProductRepositoryApi;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,13 +16,16 @@ import java.util.Optional;
 @RequestMapping(path="/api/product",produces="application/json" )
 public class RestProductController {
     private final ProductRepositoryApi productRepository;
+    private final JmsTemplate jmsTemplate;
 
-    public RestProductController(ProductRepositoryApi productRepository) {
+    public RestProductController(ProductRepositoryApi productRepository, JmsTemplate jmsTemplate) {
         this.productRepository = productRepository;
+        this.jmsTemplate = jmsTemplate;
     }
 
     @GetMapping(value = { "", "/" })
     public @NotNull Iterable<Product> getProducts() {
+        jmsTemplate.convertAndSend("All products from database!");
         return productRepository.findAllByOrderByProductId();
     }
 
@@ -31,7 +35,7 @@ public class RestProductController {
         Optional<Product> product;
 
             product = productRepository.findByProductId(id);
-
+        jmsTemplate.convertAndSend("The product " + product.getClass().getName() + " is here!");
         return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -44,7 +48,7 @@ public class RestProductController {
         product.setUnitInStock(product.getUnitInStock());
         product.setName(product.getName());
         product.setPrice(product.getPrice());
-
+        jmsTemplate.convertAndSend("New product " + product.getClass().getName() + " saved!");
         return productRepository.save(product);
     }
 
@@ -63,8 +67,9 @@ public class RestProductController {
             value.setUnitInStock(updatedProduct.getUnitInStock());
 
             productRepository.save(value);
-        });
 
+        });
+        jmsTemplate.convertAndSend("The product " + product.getClass().getName() + " is updated!");
         return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -73,7 +78,9 @@ public class RestProductController {
     public void delete(@PathVariable Long id){
         boolean exists = productRepository.existsByProductId(id);
         if(exists){
+
             productRepository.deleteById(id);
+            jmsTemplate.convertAndSend("The product  is deleted!");
         }
     }
 
